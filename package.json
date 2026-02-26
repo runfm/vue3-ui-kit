@@ -1,0 +1,38 @@
+{
+  "name": "my-ui-kit",
+  "version": "1.0.0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/my-ui-kit.umd.cjs",
+  "module": "./dist/my-ui-kit.js",
+  "exports": {
+    ".": {
+      "import": "./dist/my-ui-kit.js",
+      "require": "./dist/my-ui-kit.umd.cjs"
+    },
+    "./dist/my-ui-kit.css": "./dist/my-ui-kit.css"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "build": "NODE_ENV=production npm run lint && vite build",
+    "build:dev": "vite build --mode dev"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "eslint": "^10.0.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-vue": "^10.8.0",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.8.1",
+    "vite": "^6.0.0"
+  },
+  "lint-staged": {
+    "*.{js,vue}": "eslint"
+  }
+}

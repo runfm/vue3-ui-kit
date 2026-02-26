@@ -1,0 +1,26 @@
+/* UiKit/src/assets/sizing.css */
+:root {
+  /* Размер шрифтов */
+  --ui-font-size-s: 12px;
+  --ui-font-size-m: 14px;
+  --ui-font-size-l: 16px;
+  --ui-font-size-xl: 18px;
+
+  /* Высота строк (line-height) для лучшей читаемости */
+  --ui-line-height-s: 1.5;
+  --ui-line-height-m: 1.57;
+  --ui-line-height-l: 1.6;
+  --ui-line-height-xl: 1.6;
+
+  /* Отступы между элементами внутри (gap) */
+  --ui-spacing-s: 2px;
+  --ui-spacing-m: 4px;
+  --ui-spacing-l: 6px;
+  --ui-spacing-xl: 8px;
+
+  /* Минимальная высота кнопок для стабильности */
+  --ui-input-height-s: 32px;
+  --ui-input-height-m: 40px; /* Твое предложение */
+  --ui-input-height-l: 48px;
+  --ui-input-height-xl: 56px;
+}
