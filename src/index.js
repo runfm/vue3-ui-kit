@@ -4,6 +4,7 @@ import '@/assets/style/sizing.css'
 
 import UiButton from '@/components/ui-button/ui-button.vue'
 import UiIcon from '@/components/ui-icon/ui-icon.vue'
+import UiSwitch from './components/ui-boolean/ui-switch.vue'
 
 // 1. Рекурсивный импорт вообще всех иконок из папки icons
 const iconsModules = import.meta.glob('./assets/icons/**/*.vue', {
@@ -31,13 +32,13 @@ const extractIcons = (icons) => {
 const Icons = extractIcons(iconsModules)
 
 // 2. ЭКСПОРТ
-export { UiButton, UiIcon, Icons }
+export { UiSwitch, UiButton, UiIcon, Icons }
 // 3. Плагин для глобальной регистрации (app.use)
 export default {
   install: (app) => {
     app.component('UiButton', UiButton)
     app.component('UiIcon', UiIcon)
-
+    app.component('UiSwitch', UiSwitch)
     // Если захочешь, чтобы иконки были доступны глобально без импорта:
     Object.entries(Icons).forEach(([name, component]) => {
       app.component(name, component)
