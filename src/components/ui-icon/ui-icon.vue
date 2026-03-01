@@ -17,16 +17,24 @@ const props = defineProps({
     type: String,
     default: '', // По умолчанию берет цвет родителя или --ui-accent-color из CSS
   },
+  weight: {
+    type: [String, Number],
+    default: 2,
+  },
 })
 
 const customStyle = computed(() => {
-  return props.color ? { color: props.color } : {}
+  return {
+    // Если color пустой, ставим inherit, чтобы иконка красилась цветом текста родителя
+    color: props.color || 'inherit',
+    '--ui-icon-stroke': props.weight,
+  }
 })
 </script>
 
 <style scoped>
 .ui-icon {
-  /* Иерархия цвета: пропс -> глобальный акцент -> текущий цвет текста */
+  --scale: var(--ui-icon-scale-factor, 1.1);
   --icon-color: var(--ui-color-black-80, currentColor);
 
   display: inline-flex;
@@ -39,20 +47,20 @@ const customStyle = computed(() => {
 
 /* Размеры синхронизируем с sizing.css */
 .size-s {
-  width: var(--ui-font-size-s);
-  height: var(--ui-font-size-s);
+  width: calc(var(--ui-font-size-s) * var(--scale));
+  height: calc(var(--ui-font-size-s) * var(--scale));
 }
 .size-m {
-  width: var(--ui-font-size-m);
-  height: var(--ui-font-size-m);
+  width: calc(var(--ui-font-size-m) * var(--scale));
+  height: calc(var(--ui-font-size-m) * var(--scale));
 }
 .size-l {
-  width: var(--ui-font-size-l);
-  height: var(--ui-font-size-l);
+  width: calc(var(--ui-font-size-l) * var(--scale));
+  height: calc(var(--ui-font-size-l) * var(--scale));
 }
 .size-xl {
-  width: var(--ui-font-size-xl);
-  height: var(--ui-font-size-xl);
+  width: calc(var(--ui-font-size-xl) * var(--scale));
+  height: calc(var(--ui-font-size-xl) * var(--scale));
 }
 
 /* Глубокий селектор, чтобы SVG всегда занимал 100% обертки */

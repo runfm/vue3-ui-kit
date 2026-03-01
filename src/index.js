@@ -5,32 +5,33 @@ import '@/assets/style/sizing.css'
 import UiButton from '@/components/ui-button/ui-button.vue'
 import UiIcon from '@/components/ui-icon/ui-icon.vue'
 
-// 1. Динамический импорт всех .vue файлов
-const monochromeIcons = import.meta.glob('./assets/icons/monochrome/*.vue', { eager: true })
-const coloredIcons = import.meta.glob('./assets/icons/colored/*.vue', { eager: true })
+// 1. Рекурсивный импорт вообще всех иконок из папки icons
+const iconsModules = import.meta.glob('./assets/icons/**/*.vue', {
+  eager: true,
+})
 
 const extractIcons = (icons) => {
   return Object.entries(icons).reduce((acc, [path, module]) => {
-    // 1. Извлекаем имя файла: "ui-button.vue" -> "ui-button"
+    // Получаем компонент (default export из .vue файла)
+    const component = module.default
     const fileName = path.split('/').pop().replace('.vue', '')
-
-    // 2. Преобразуем kebab-case в PascalCase
-    const name = fileName
+    // Берем имя из defineOptions.name или используем имя файла как запасной вариант
+    const exportName = fileName
       .split('-')
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join('')
+    const name = component.name.export || exportName
 
-    acc[name] = module.default
+    acc[name] = component
     return acc
   }, {})
 }
 
-// Собираем все иконки в один объект
-const icons = { ...extractIcons(monochromeIcons), ...extractIcons(coloredIcons) }
+// Теперь это один плоский объект со всеми иконками
+const Icons = extractIcons(iconsModules)
 
-// 2. ЭКСПОРТ (теперь без ошибок)
-export { UiButton, UiIcon, icons } // Экспортируем объект icons как именованный член
-
+// 2. ЭКСПОРТ
+export { UiButton, UiIcon, Icons }
 // 3. Плагин для глобальной регистрации (app.use)
 export default {
   install: (app) => {
@@ -38,7 +39,7 @@ export default {
     app.component('UiIcon', UiIcon)
 
     // Если захочешь, чтобы иконки были доступны глобально без импорта:
-    Object.entries(icons).forEach(([name, component]) => {
+    Object.entries(Icons).forEach(([name, component]) => {
       app.component(name, component)
     })
   },
