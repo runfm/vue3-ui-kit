@@ -35,7 +35,7 @@ const customStyle = computed(() => {
 <style scoped>
 .ui-icon {
   --scale: var(--ui-icon-scale-factor, 1.1);
-  --icon-color: var(--ui-color-black-80, currentColor);
+  --icon-color: var(--ui-icon-color, currentColor);
 
   display: inline-flex;
   align-items: center;

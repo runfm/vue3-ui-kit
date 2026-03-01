@@ -122,16 +122,17 @@ defineProps({
 .ui-button:disabled {
   cursor: not-allowed;
   background-color: transparent;
-  border-color: var(--ui-color-white-90);
-  color: var(--ui-color-black-40);
+  border-color: var(--ui-inactive-text-color);
+  color: var(--ui-inactive-text-color);
   filter: none;
   transform: none;
 }
 
 /* Заливка только для заблокированной primary кнопки */
 .is-primary:disabled {
-  background-color: var(--ui-color-white-95);
-  border-color: var(--ui-color-white-90);
+  background-color: var(--ui-inactive-bg-color);
+  border-color: var(--ui-inactive-bg-color);
+  color: var(--ui-inactive-text-color);
 }
 
 /* Для no-border в disabled оставляем все прозрачным */
@@ -146,7 +147,7 @@ defineProps({
   filter: none;
 }
 .is-primary:disabled:hover {
-  background-color: var(--ui-color-white-95);
+  background-color: var(--ui-inactive-bg-color);
 }
 .is-no-border:disabled:hover {
   background-color: transparent;
