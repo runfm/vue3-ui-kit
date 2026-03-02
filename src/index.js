@@ -1,18 +1,15 @@
-import '@/assets/style/colors.css'
-import '@/assets/style/base.css'
-import '@/assets/style/sizing.css'
+import.meta.glob('@/assets/style/*.css', { eager: true })
 
 import UiButton from '@/components/ui-button/ui-button.vue'
 import UiIcon from '@/components/ui-icon/ui-icon.vue'
-import UiSwitch from './components/ui-boolean/ui-switch.vue'
+import UiSwitch from '@/components/ui-boolean/ui-switch.vue'
 
-// 1. Рекурсивный импорт вообще всех иконок из папки icons
-const iconsModules = import.meta.glob('./assets/icons/**/*.vue', {
+const iconsModules = import.meta.glob('@/assets/icons/**/*.vue', {
   eager: true,
 })
 
-const extractIcons = (icons) => {
-  return Object.entries(icons).reduce((acc, [path, module]) => {
+const getComponents = (components_modules) => {
+  return Object.entries(components_modules).reduce((acc, [path, module]) => {
     // Получаем компонент (default export из .vue файла)
     const component = module.default
     const fileName = path.split('/').pop().replace('.vue', '')
@@ -28,8 +25,7 @@ const extractIcons = (icons) => {
   }, {})
 }
 
-// Теперь это один плоский объект со всеми иконками
-const Icons = extractIcons(iconsModules)
+const Icons = getComponents(iconsModules)
 
 // 2. ЭКСПОРТ
 export { UiSwitch, UiButton, UiIcon, Icons }

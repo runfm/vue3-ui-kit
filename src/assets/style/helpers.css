@@ -1,0 +1,42 @@
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+.w-fit {
+  width: fit-content;
+}
+
+.g-4 {
+  gap: 4px;
+}
+
+.g-8 {
+  gap: 8px;
+}
+
+.c-pointer {
+  cursor: pointer;
+}
+.c-deny {
+  cursor: not-allowed;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.static {
+  position: static;
+}
+
+.sticky {
+  position: sticky;
+}
