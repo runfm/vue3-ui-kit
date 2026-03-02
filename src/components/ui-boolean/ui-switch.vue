@@ -1,21 +1,28 @@
 <template>
-  <div
-    :class="['ui-switch', `ui-switch--size-${size}`, { 'is-checked': isChecked }]"
-    @click="toggle"
-    role="switch"
-    :aria-checked="isChecked"
-  >
-    <div class="ui-switch-handle" />
-  </div>
+  <section class="flex g-8 w-fit c-pointer" @click="toggle">
+    <div v-if="$slots.leftValue">
+      <slot name="leftValue" :value="leftValue"></slot>
+    </div>
+    <div
+      :class="['relative', 'ui-switch', `ui-switch--size-${size}`, { 'is-checked': isChecked }]"
+      role="switch"
+      :aria-checked="isChecked"
+    >
+      <div class="ui-switch-handle absolute" />
+    </div>
+    <div v-if="$slots.rightValue">
+      <slot name="rightValue" :value="rightValue"></slot>
+    </div>
+  </section>
 </template>
 
 <script setup>
 import { computed } from 'vue'
 
 const props = defineProps({
-  leftValue: { type: [String, Number, Boolean], default: false },
-  rightValue: { type: [String, Number, Boolean], default: true },
-  modelValue: { type: [String, Number, Boolean], default: false },
+  leftValue: { type: [String, Number, Boolean, Object], default: false },
+  rightValue: { type: [String, Number, Boolean, Object], default: true },
+  modelValue: { type: [String, Number, Boolean, Object], default: false },
   size: {
     type: String,
     default: 'm',
@@ -36,17 +43,12 @@ function toggle() {
 <style scoped>
 .ui-switch {
   background-color: var(--ui-switch-bg, var(--ui-inactive-bg-color));
-  /* Высота = ручка + 4px отступов */
   height: calc(var(--ui-switch-handle-size) + 4px);
   width: var(--ui-switch-width);
-  /* Твой радиус */
   border-radius: calc(var(--ui-switch-width) * 10);
-  position: relative;
-  cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
-/* Гармоничные размеры: ширина в 2 раза больше высоты */
 .ui-switch--size-s {
   --ui-switch-handle-size: 14px;
   --ui-switch-width: 36px;
@@ -76,7 +78,6 @@ function toggle() {
   height: var(--ui-switch-handle-size);
   background-color: var(--ui-color-white);
   border-radius: 50%;
-  position: absolute;
   top: 2px;
   left: 2px;
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
