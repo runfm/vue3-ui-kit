@@ -1,8 +1,10 @@
 /* UiKit/src/assets/colors.css */
 :root {
   --ui-color-red: #ff4d4f;
-  /* Базовые цвета */
+  --ui-color-green: #52c41a;
+  --ui-color-orange: #faad14;
   --ui-color-white: #ffffff;
+  --ui-color-black: #000000;
 
   /* СВЕТЛЫЕ (Фоны, треки свитчей, неактивные заливки) */
   --ui-color-gray-10: #f8f9fa; /* Почти белый, для подложек */
@@ -19,17 +21,12 @@
   --ui-color-gray-80: #343a40; /* Темный текст (строгий) */
   --ui-color-gray-90: #212529; /* Почти черный (акценты) */
 
-  /* Системный черный для редких случаев */
-  --ui-color-black: #000000;
-
   --ui-accent-color: var(--ui-color-red);
-  --ui-inactive-bg-color: var(--ui-color-gray-80);
-  --ui-inactive-text-color: var(--ui-color-gray-60);
+  --ui-inactive-bg-color: var(--ui-color-gray-70);
+  --ui-inactive-text-color: var(--ui-color-gray-50);
 
   /* 3. Статусные цвета */
-  --ui-color-success: #52c41a;
-  --ui-color-warning: #faad14;
-
-  /* Danger ссылается на акцент */
-  --ui-color-danger: var(--ui-accent-color);
+  --ui-color-success: var(--ui-color-green);
+  --ui-color-warning: var(--ui-color-orange);
+  --ui-color-danger: var(--ui-color-red);
 }

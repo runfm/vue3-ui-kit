@@ -31,12 +31,7 @@ defineProps({
 
 <style scoped>
 .ui-button {
-  /* Иерархия акцента */
-  --ui-button-accent-color: var(--ui-accent-color);
-  --accent: var(--ui-button-accent-color);
-
-  /* Геометрия из sizing.css */
-  --ui-button-width: fit-content;
+  --accent: var(--ui-button-accent-color, var(--ui-accent-color));
   --ui-button-gap: var(--ui-spacing-m);
   --ui-button-height: var(--ui-input-height-m);
 
@@ -45,7 +40,7 @@ defineProps({
   justify-content: center;
 
   height: var(--ui-button-height);
-  width: var(--ui-button-width);
+  width: var(--ui-button-width, fit-content);
   gap: var(--ui-button-gap);
 
   cursor: pointer;
@@ -62,12 +57,8 @@ defineProps({
 }
 
 .ui-button:hover:not(:disabled) {
-  background-color: rgba(255, 77, 79, 0.05);
+  background-color: #ff4d4f0d;
   filter: brightness(1.05);
-}
-
-.ui-button:active:not(:disabled) {
-  transform: scale(0.98);
 }
 
 /* PRIMARY STATE (Solid) */
@@ -89,7 +80,7 @@ defineProps({
 }
 
 .is-no-border:hover:not(:disabled) {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: #0000000d;
 }
 
 /* РАЗМЕРНАЯ СЕТКА */
