@@ -1,0 +1,22 @@
+.theme-light {
+  /* Фоновые слои (Elevation) */
+  --color-bg-deep: var(--color-gray-30);
+  /* Самый нижний (подложка приложения) */
+  --color-bg-upper: var(--color-gray-20);
+  /* Средний (боковые панели, как в чате) */
+  --color-bg-surface: var(--color-gray-10);
+  /* Основной (рабочая область/чат) */
+  --color-bg-raised: var(--color-gray-10);
+  /* Верхний (карточки/модалки + тени) */
+
+  /* Текст и состояния */
+  --color-text: var(--color-gray-90);
+  /* Основной текст, активные кнопки */
+  --color-text-muted: var(--color-gray-60);
+  /* Inactive кнопки, подписи, иконки */
+  --color-disable: var(--color-gray-40);
+  --color-border: var(--color-gray-30);
+
+  /* Тени (для уровня raised) */
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}

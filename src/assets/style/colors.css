@@ -1,32 +1,27 @@
 /* UiKit/src/assets/colors.css */
 :root {
-  --ui-color-red: #ff4d4f;
-  --ui-color-green: #52c41a;
-  --ui-color-orange: #faad14;
-  --ui-color-white: #ffffff;
-  --ui-color-black: #000000;
+  /* Palette */
+  --color-red: #ff4d4f;
+  --color-green: #52c41a;
+  --color-orange: #faad14;
 
-  /* СВЕТЛЫЕ (Фоны, треки свитчей, неактивные заливки) */
-  --ui-color-gray-10: #f8f9fa; /* Почти белый, для подложек */
-  --ui-color-gray-20: #e9ecef; /* Фон disabled кнопок */
-  --ui-color-gray-30: #dee2e6; /* Тонкие границы (borders) */
+  --color-white: #ffffff;
 
-  /* СРЕДНИЕ (Иконки, плейсхолдеры, неактивный текст) */
-  --ui-color-gray-40: #ced4da; /* Деактивированные иконки */
-  --ui-color-gray-50: #adb5bd; /* Текст disabled кнопок (виден на gray-20) */
-  --ui-color-gray-60: #868e96; /* Вторичный текст, подписи */
+  --color-gray-10: #f8f9fa;
+  --color-gray-20: #e9ecef;
+  --color-gray-30: #dee2e6;
+  --color-gray-40: #ced4da;
+  --color-gray-50: #adb5bd;
+  --color-gray-60: #868e96;
+  --color-gray-70: #495057;
+  --color-gray-80: #343a40;
+  --color-gray-90: #212529;
 
-  /* ТЕМНЫЕ (Твой диапазон, заголовки, основной текст) */
-  --ui-color-gray-70: #495057; /* Основной текст (мягкий) */
-  --ui-color-gray-80: #343a40; /* Темный текст (строгий) */
-  --ui-color-gray-90: #212529; /* Почти черный (акценты) */
+  --color-black: #000000;
 
-  --ui-accent-color: var(--ui-color-red);
-  --ui-inactive-bg-color: var(--ui-color-gray-70);
-  --ui-inactive-text-color: var(--ui-color-gray-50);
-
-  /* 3. Статусные цвета */
-  --ui-color-success: var(--ui-color-green);
-  --ui-color-warning: var(--ui-color-orange);
-  --ui-color-danger: var(--ui-color-red);
+  /* Functions */
+  --color-accent: var(--color-red);
+  --color-success: var(--color-green);
+  --color-warning: var(--color-orange);
+  --color-danger: var(--color-red);
 }

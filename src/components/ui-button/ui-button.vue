@@ -1,15 +1,14 @@
 <template>
   <button
-    class="ui-button"
-    :type="canSubmit ? 'submit' : 'button'"
+    :type="type"
     :class="[
-      `size-${size}`,
-      {
-        'is-primary': primary,
-        'is-no-border': noBorder,
-      },
+      'ui-button',
+      `ui-button--size-${size}`,
+      `ui-button--mode-${mode}`,
+      { 'ui-button--no-border': noBorder },
     ]"
     :disabled="disabled"
+    @click="$emit('click', $event)"
   >
     <slot />
   </button>
@@ -17,130 +16,124 @@
 
 <script setup>
 defineProps({
-  primary: Boolean,
-  noBorder: Boolean,
-  disabled: Boolean,
-  canSubmit: Boolean,
   size: {
     type: String,
     default: 'm',
-    validator: (val) => ['xl', 'l', 'm', 's'].includes(val),
+    validator: (v) => ['s', 'm', 'l', 'xl'].includes(v),
+  },
+  mode: {
+    type: String,
+    default: 'default',
+    validator: (v) => ['default', 'active', 'primary'].includes(v),
+  },
+  noBorder: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  type: {
+    type: String,
+    default: 'button',
   },
 })
+
+defineEmits(['click'])
 </script>
 
 <style scoped>
 .ui-button {
-  --accent: var(--ui-button-accent-color, var(--ui-accent-color));
-  --ui-button-gap: var(--ui-spacing-m);
-  --ui-button-height: var(--ui-input-height-m);
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  height: var(--ui-button-height);
-  width: var(--ui-button-width, fit-content);
-  gap: var(--ui-button-gap);
-
-  cursor: pointer;
-  border-radius: 4px;
+  font-family: inherit;
   font-weight: 500;
-  transition: all 0.2s ease;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border-radius: 4px;
   outline: none;
-
-  /* DEFAULT STATE (Outline) */
-  background-color: transparent;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  padding: 0 16px;
+  gap: var(--ui-spacing-m);
+  /* По умолчанию всегда есть граница, чтобы не "прыгал" размер */
+  border: 1px solid currentColor;
+  background: transparent;
+  white-space: nowrap;
 }
 
-.ui-button:hover:not(:disabled) {
-  background-color: #ff4d4f0d;
-  filter: brightness(1.05);
+/* Скрываем границу визуально, но сохраняем 1px для размера */
+.ui-button--no-border {
+  border-color: transparent !important;
 }
 
-/* PRIMARY STATE (Solid) */
-.is-primary {
-  background-color: var(--accent);
-  color: var(--ui-color-white);
-  border-color: var(--accent);
-}
-
-.is-primary:hover:not(:disabled) {
-  background-color: var(--accent);
-  filter: brightness(1.1);
-  color: var(--ui-color-white);
-}
-
-/* NO-BORDER STATE (Ghost) */
-.is-no-border {
-  border-color: transparent;
-}
-
-.is-no-border:hover:not(:disabled) {
-  background-color: #0000000d;
-}
-
-/* РАЗМЕРНАЯ СЕТКА */
-.size-s {
-  --ui-button-height: var(--ui-input-height-s);
-  --ui-button-gap: var(--ui-spacing-s);
+/* Размеры (высота берется из вашего sizing.css) */
+.ui-button--size-s {
+  height: var(--ui-input-height-s);
   padding: 0 12px;
   font-size: var(--ui-font-size-s);
 }
-.size-m {
-  --ui-button-height: var(--ui-input-height-m);
-  --ui-button-gap: var(--ui-spacing-m);
+.ui-button--size-m {
+  height: var(--ui-input-height-m);
   padding: 0 16px;
   font-size: var(--ui-font-size-m);
 }
-.size-l {
-  --ui-button-height: var(--ui-input-height-l);
-  --ui-button-gap: var(--ui-spacing-l);
-  padding: 0 24px;
+.ui-button--size-l {
+  height: var(--ui-input-height-l);
+  padding: 0 20px;
   font-size: var(--ui-font-size-l);
 }
-.size-xl {
-  --ui-button-height: var(--ui-input-height-xl);
-  --ui-button-gap: var(--ui-spacing-xl);
-  padding: 0 32px;
+.ui-button--size-xl {
+  height: var(--ui-input-height-xl);
+  padding: 0 24px;
   font-size: var(--ui-font-size-xl);
 }
 
-/* DISABLED STATE */
+/* --- РЕЖИМЫ (MODES) --- */
+
+/* DEFAULT: Спокойный серый -> Акцент при наведении */
+.ui-button--mode-default {
+  color: var(--color-text-muted);
+  border-color: var(--color-text-muted);
+}
+.ui-button--mode-default:hover:not(:disabled) {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* ACTIVE: Сразу в цвете акцента */
+.ui-button--mode-active {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+.ui-button--mode-active:hover:not(:disabled) {
+  /* Осветляем для фидбека в любой теме */
+  filter: brightness(1.2);
+}
+
+/* PRIMARY: Заливка акцентом, текст всегда светлый (gray-10) */
+.ui-button--mode-primary {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-gray-10);
+}
+.ui-button--mode-primary:hover:not(:disabled) {
+  /* Небольшое изменение прозрачности или яркости для фидбека */
+  filter: saturate(1.2) brightness(1.1);
+}
+
+/* --- СОСТОЯНИЯ --- */
+
 .ui-button:disabled {
   cursor: not-allowed;
-  background-color: transparent;
-  border-color: var(--ui-inactive-text-color);
-  color: var(--ui-inactive-text-color);
-  filter: none;
-  transform: none;
+  color: var(--color-disable) !important;
+  border-color: var(--color-disable) !important;
+  background-color: transparent !important;
 }
 
-/* Заливка только для заблокированной primary кнопки */
-.is-primary:disabled {
-  background-color: var(--ui-inactive-bg-color);
-  border-color: var(--ui-inactive-bg-color);
-  color: var(--ui-inactive-text-color);
-}
-
-/* Для no-border в disabled оставляем все прозрачным */
-.is-no-border:disabled {
-  border-color: transparent;
-  background-color: transparent;
-}
-
-/* Отмена ховера для всех disabled */
-.ui-button:disabled:hover {
-  background-color: transparent;
-  filter: none;
-}
-.is-primary:disabled:hover {
-  background-color: var(--ui-inactive-bg-color);
-}
-.is-no-border:disabled:hover {
-  background-color: transparent;
+/* Специальное disabled для залитой кнопки */
+.ui-button--mode-primary:disabled {
+  background-color: var(--color-gray-20) !important;
+  border-color: var(--color-gray-20) !important;
+  color: var(--color-gray-50) !important;
 }
 </style>

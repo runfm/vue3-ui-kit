@@ -1,4 +1,10 @@
-import.meta.glob('@/assets/style/*.css', { eager: true })
+// Порядок важен для каскада
+import '@/assets/style/colors.css'
+import '@/assets/style/sizing.css'
+import '@/assets/style/base.css'
+
+// Остальное (helpers и темы)
+import.meta.glob(['@/assets/style/helpers.css', '@/assets/style/themes/*.css'], { eager: true })
 
 import UiButton from '@/components/ui-button/ui-button.vue'
 import UiIcon from '@/components/ui-icon/ui-icon.vue'
