@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Запускаем lint-staged внутри контейнера Node 24
+# Он сам подхватит настройки из package.json и вызовет eslint для нужных файлов
+docker run --rm \
+  -v "$(pwd):/app" \
+  -w /app \
+  node:24-alpine \
+  npm run lint
+
