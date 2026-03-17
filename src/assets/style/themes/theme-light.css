@@ -1,4 +1,4 @@
-.theme-light {
+.theme--light {
   /* Фоновые слои (Elevation) */
   --color-bg-deep: var(--color-gray-30);
   /* Самый нижний (подложка приложения) */

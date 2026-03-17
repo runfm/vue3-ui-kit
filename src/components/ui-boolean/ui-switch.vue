@@ -1,6 +1,6 @@
 <template>
   <section class="flex g-8 w-fit c-pointer" @click="toggle">
-    <div v-if="$slots.leftValue">
+    <div v-if="$slots.leftValue" class="slot-wrapper flex fa-center">
       <slot name="leftValue" :value="leftValue"></slot>
     </div>
     <div
@@ -10,7 +10,7 @@
     >
       <div class="ui-switch-handle absolute" />
     </div>
-    <div v-if="$slots.rightValue">
+    <div v-if="$slots.rightValue" class="slot-wrapper flex fa-center">
       <slot name="rightValue" :value="rightValue"></slot>
     </div>
   </section>
@@ -42,7 +42,7 @@ function toggle() {
 
 <style scoped>
 .ui-switch {
-  background-color: var(--ui-switch-bg, var(--ui-inactive-bg-color));
+  background-color: var(--ui-switch-bg, var(--color-bg-raised));
   height: calc(var(--ui-switch-handle-size) + 4px);
   width: var(--ui-switch-width);
   border-radius: calc(var(--ui-switch-width) * 10);
@@ -70,13 +70,13 @@ function toggle() {
 }
 
 .ui-switch.is-checked {
-  background-color: var(--ui-accent-color);
+  background-color: var(--color-accent);
 }
 
 .ui-switch-handle {
   width: var(--ui-switch-handle-size);
   height: var(--ui-switch-handle-size);
-  background-color: var(--ui-color-white);
+  background-color: var(--color-white);
   border-radius: 50%;
   top: 2px;
   left: 2px;
