@@ -1,19 +1,19 @@
-.theme-dark {
+.theme--dark {
   /* Фоновые слои (Elevation) */
   --color-bg-deep: var(--color-gray-90);
   /* Самый нижний (глубокий черный) */
-  --color-bg-surface: var(--color-gray-90);
+  --color-bg-surface: var(--color-gray-80);
   /* Основной (рабочая область/чат) */
-  --color-bg-upper: var(--color-gray-80);
+  --color-bg-upper: var(--color-gray-70);
   /* Средний (боковые панели — светлее) */
-  --color-bg-raised: var(--color-gray-70);
+  --color-bg-raised: var(--color-gray-60);
   /* Верхний (карточки/модалки — самые светлые) */
 
   /* Текст и состояния */
   --color-text: var(--color-gray-10);
-  --color-text-muted: var(--color-gray-50);
-  --color-disable: var(--color-gray-60);
-  --color-border: var(--color-gray-70);
+  --color-text-muted: var(--color-gray-40);
+  --color-disable: var(--color-gray-50);
+  --color-border: var(--color-gray-60);
 
   /* Тени (для уровня raised) */
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
